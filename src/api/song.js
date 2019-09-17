@@ -5,7 +5,7 @@ import axios from 'axios'
 const debug = process.env.NODE_ENV !== 'production'
 
 export function getLyric (mid) {
-  const url = 'http://localhost:8904/api/lyric'
+  const url = 'https://www.superdev.top/music/api/lyric'
   const data = Object.assign({}, commonParams, {
     songmid: mid,
     platform: 'yqq',
@@ -23,7 +23,7 @@ export function getLyric (mid) {
 }
 
 export function getSongsUrl (songs) {
-  const url = debug ? '/api/getPurlUrl' : 'http://localhost:8904/api/getPurlUrl'
+  const url = debug ? '/api/getPurlUrl' : 'https://www.superdev.top/music/api/getPurlUrl'
   let mids = []
   let types = []
 

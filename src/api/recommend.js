@@ -13,7 +13,7 @@ export function getRecommend () {
 }
 
 export function getDiscList () {
-  const url = 'http://www.superdev.top/music/api/getDiscList'
+  const url = 'https://www.superdev.top/music/api/getDiscList'
   const data = Object.assign({}, commonParams, {
     format: 'json',
     platform: 'yqq.json',
@@ -33,7 +33,7 @@ export function getDiscList () {
 }
 
 export function getSongList (disstid) {
-  const url = 'http://www.superdev.top/music/api/getSongList'
+  const url = 'https://www.superdev.top/music/api/getSongList'
   const data = Object.assign({}, commonParams, {
     disstid,
     type: 1,

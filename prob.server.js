@@ -94,5 +94,5 @@ module.exports = app.listen(8904, function (err) {
     console.log(err)
     return
   }
-  console.log('Listening at http://localhost:9000')
+  console.log('Listening at http://localhost:8904')
 })
