@@ -12,3 +12,21 @@ export function shuffle (arr) {
   }
   return _arr
 }
+
+/**
+ * 防抖动函数
+ * @param func 需要包装的函数
+ * @param delay 抖动时间时间
+ * @return {Function} 封装后的防抖动函数
+ */
+export function debounce (func, delay) {
+  let timer
+  return function (...args) {
+    if (timer) {
+      clearTimeout(timer)
+    }
+    timer = setTimeout(() => {
+      func.apply(this, args)
+    }, delay)
+  }
+}

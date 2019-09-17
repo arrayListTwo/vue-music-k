@@ -1,5 +1,5 @@
 <template>
-  <div class="recommend">
+  <div class="recommend" ref="recommend">
     <scroll ref="scroll" class="recommend-content" :data="discList">
       <div>
         <div v-if="recommends.length" class="slider-wrapper">
@@ -14,7 +14,10 @@
         <div class="recommend-list">
           <h1 class="list-title">热门歌单推荐</h1>
           <ul>
-            <li v-for="item in discList" class="item" :key="item.dissid">
+            <li class="item"
+                @click="selectItem(item)"
+                v-for="item in discList"
+                :key="item.dissid">
               <div class="icon">
                 <img v-lazy="item.imgurl" height="60" width="60">
               </div>
@@ -30,6 +33,7 @@
         <loading></loading>
       </div>
     </scroll>
+    <router-view></router-view>
   </div>
 </template>
 
@@ -39,9 +43,12 @@
   import Slider from 'base/slider/slider'
   import Scroll from 'base/scroll/scroll'
   import Loading from 'base/loading/loading'
+  import { playListMixin } from 'common/js/mixin'
+  import { mapMutations } from 'vuex'
 
   export default {
     name: 'recommend',
+    mixins: [playListMixin],
     data () {
       return {
         recommends: [],
@@ -53,11 +60,21 @@
       this._getDiscList()
     },
     methods: {
+      handlePlaylist (playlist) {
+        const bottom = playlist.length > 0 ? '60px' : ''
+        this.$refs.recommend.style.bottom = bottom
+        this.$refs.scroll.refresh()
+      },
+      selectItem (item) {
+        this.$router.push({
+          path: `/recommend/${item.dissid}`
+        })
+        this.setDisc(item)
+      },
       _getRecommend () {
         getRecommend().then((res) => {
           if (res.code === ERR_OK) {
             this.recommends = res.data.slider
-            // console.log(this.recommends)
           }
         })
       },
@@ -73,7 +90,10 @@
           this.$refs.scroll.refresh()
           this.checkLoader = true
         }
-      }
+      },
+      ...mapMutations({
+        setDisc: 'SET_DISC'
+      })
     },
     components: {
       Slider, Scroll, Loading

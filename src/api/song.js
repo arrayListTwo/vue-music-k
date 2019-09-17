@@ -4,8 +4,26 @@ import axios from 'axios'
 
 const debug = process.env.NODE_ENV !== 'production'
 
+export function getLyric (mid) {
+  const url = '/api/lyric'
+  const data = Object.assign({}, commonParams, {
+    songmid: mid,
+    platform: 'yqq',
+    hostUin: 0,
+    needNewCode: 0,
+    categoryId: 10000000,
+    pcachetime: +new Date(),
+    format: 'json'
+  })
+  return axios.get(url, {
+    params: data
+  }).then((res) => {
+    return Promise.resolve(res.data)
+  })
+}
+
 export function getSongsUrl (songs) {
-  const url = debug ? '/api/getPurlUrl' : 'url'
+  const url = debug ? '/api/getPurlUrl' : 'http://localhost:8904/api/getPurlUrl'
   let mids = []
   let types = []
 
@@ -14,7 +32,7 @@ export function getSongsUrl (songs) {
     types.push(0)
   })
 
-  const urlMid = getUrlMid(mids, types)
+  const urlMid = genUrlMid(mids, types)
 
   const data = Object.assign({}, commonParams, {
     g_tk: 5381,
@@ -60,7 +78,7 @@ export function getSongsUrl (songs) {
       if (--tryTime >= 0) {
         request()
       } else {
-        reject(new Error('Can not get the song url'))
+        reject(new Error('Can not get the songs url'))
       }
     }
 
@@ -68,25 +86,7 @@ export function getSongsUrl (songs) {
   })
 }
 
-export function getLyric (mid) {
-  const url = '/api/lyric'
-  const data = Object.assign({}, commonParams, {
-    songmid: mid,
-    pcachetime: +new Date(),
-    platform: 'yqq',
-    hostUin: 0,
-    needNewCode: 0,
-    g_tk: 67232076,
-    format: 'json'
-  })
-  return axios.get(url, {
-    params: data
-  }).then((res) => {
-    return Promise.resolve(res.data)
-  })
-}
-
-function getUrlMid (mids, types) {
+function genUrlMid (mids, types) {
   const guid = getUid()
   return {
     module: 'vkey.GetVkeyServer',

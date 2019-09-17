@@ -8,6 +8,12 @@ import VueLazyLoad from 'vue-lazyload'
 
 import '@/common/stylus/index.styl'
 
+// eslint-disable-next-line
+// import vConsole from 'vconsole'
+// eslint-disable-next-line
+// var vConsoleObj = new vConsole()
+// console.log('test')
+
 // fastclick.attach(document.body)
 
 Vue.use(VueLazyLoad, {

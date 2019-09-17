@@ -1,0 +1,58 @@
+<template>
+  <ul class="switches">
+    <li class="switch-item"
+        @click="switchItem(index)"
+        v-for="(item, index) in switches"
+        :key="index"
+        :class="{'active': currentIndex === index}">
+      <span>{{item.name}}</span>
+    </li>
+  </ul>
+</template>
+
+<script type="text/ecmascript-6">
+  export default {
+    name: 'switches',
+    props: {
+      switches: {
+        type: Array,
+        default () {
+          return []
+        }
+      },
+      currentIndex: {
+        type: Number,
+        default () {
+          return 0
+        }
+      }
+    },
+    methods: {
+      switchItem (index) {
+        this.$emit('switch', index)
+      }
+    }
+  }
+</script>
+
+<style lang="stylus" scoped>
+  @import "../../common/stylus/variable"
+  .switches
+    display: flex
+    align-items: center
+    width: 240px
+    margin: 0 auto
+    border: 1px solid $color-highlight-background
+    border-radius: 5px
+
+    .switch-item
+      flex: 1
+      padding: 8px
+      text-align center
+      font-size $font-size-medium
+      color: $color-text-d
+
+      &.active
+        background: $color-highlight-background
+        color: $color-text
+</style>

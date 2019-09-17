@@ -57,9 +57,14 @@ function filterSinger (singer) {
 }
 
 export function isValidMusic (musicData) {
-  return musicData.songid && musicData.albummid && (!musicData.pay || musicData.pay.payalbumprice === 0)
+  return musicData.songid && musicData.albummid && (!musicData.pay || musicData.pay.payplay === 0)
 }
 
+/**
+ * 处理歌曲的url问题
+ * @param songs 歌曲列表
+ * @return {*} 处理url后的歌曲列表
+ */
 export function processSongsUrl (songs) {
   if (!songs.length) {
     return Promise.resolve(songs)
