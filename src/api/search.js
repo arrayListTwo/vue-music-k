@@ -13,7 +13,7 @@ export function getHotKey () {
 }
 
 export function search (query, page, zhida, perpage) {
-  const url = 'http://localhost:8904/api/search'
+  const url = 'http://www.superdev.top/music/api/search'
   const data = Object.assign({}, commonParams, {
     w: query,
     p: page,
