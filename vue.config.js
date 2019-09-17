@@ -8,7 +8,7 @@ function resolve (dir) {
 
 module.exports = {
   outputDir: undefined,
-  baseUrl: undefined,
+  baseUrl: '',
   assetsDir: undefined,
   runtimeCompiler: undefined,
   productionSourceMap: undefined,
