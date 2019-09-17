@@ -13,7 +13,7 @@ export function getRecommend () {
 }
 
 export function getDiscList () {
-  const url = '/api/getDiscList'
+  const url = 'http://localhost:8904/api/getDiscList'
   const data = Object.assign({}, commonParams, {
     format: 'json',
     platform: 'yqq.json',
@@ -33,7 +33,7 @@ export function getDiscList () {
 }
 
 export function getSongList (disstid) {
-  const url = '/api/getSongList'
+  const url = 'http://localhost:8904/api/getSongList'
   const data = Object.assign({}, commonParams, {
     disstid,
     type: 1,
