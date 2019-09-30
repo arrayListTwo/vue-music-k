@@ -84,7 +84,8 @@
           momentum: false,
           slide: {
             loop: this.loop,
-            threshold: 100
+            threshold: 0.3,
+            speed: 400
           }
         })
         this.slider.on('scrollEnd', () => {
