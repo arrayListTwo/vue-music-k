@@ -6,6 +6,14 @@ var app = express()
 
 var apiRoutes = express.Router()
 
+// 设置跨域访问
+app.all('*', function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', 'superdev.top')
+  res.header('Access-Control-Allow-Methods', 'PUT,POST,GET,DELETE,OPTIONS')
+  res.header('Content-Type', 'application/json;charset=utf-8')
+  next()
+})
+
 apiRoutes.get('/api/getDiscList', function (req, res) {
   let url = 'https://c.y.qq.com/splcloud/fcgi-bin/fcg_get_diss_by_tag.fcg'
   axios.get(url, {
